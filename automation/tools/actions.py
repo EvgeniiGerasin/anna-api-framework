@@ -13,22 +13,20 @@ class Action:
         self.url = url
         self._report = Report()
 
-# info request
-# url
-# header request
-# coocke
-# body
+    def request(self, type: str, **kwargs) -> Response:
+        """method of request
 
-    def get(self, **kwargs) -> Response:
-        """GET method of request
-
+        Args:
+            type (str): type of request GET, POST and etc.
         Returns:
             Response: responce of request
         """
 
-        with allure.step(f'GET request: {self.url}'):
+        with allure.step(f'GET request'):
             self._report.put_request(kwargs)
-            responce = self._s.get(self.url, **kwargs)
+            if type == 'GET':
+                responce = self._s.get(self.url, **kwargs)
+            elif type == 'POST':
+                responce = self._s.post(self.url, **kwargs)
             self._report.put_responce(responce)
-            responce
         return responce
