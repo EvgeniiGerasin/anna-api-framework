@@ -24,25 +24,43 @@ class Report:
         Args:
             responce (Response)
         """
-        # need for correct view in report
         allure.attach(
-            f'{responce.request.body}', 'Request body', allure.attachment_type.TEXT
+            f'{responce.request.method}',
+            'Request method',
+            allure.attachment_type.TEXT
         )
         allure.attach(
-            f'{responce.request.headers}', 'Request header', allure.attachment_type.TEXT
+            f'{responce.request.body}',
+            'Request body',
+            allure.attachment_type.TEXT
         )
         allure.attach(
-            f'{responce.request.url}', 'Request url', allure.attachment_type.TEXT
+            f'{responce.request.headers}',
+            'Request header',
+            allure.attachment_type.TEXT
         )
         allure.attach(
-            f'{responce.status_code}', 'Responce status code', allure.attachment_type.TEXT
+            f'{responce.request.url}',
+            'Request url',
+            allure.attachment_type.TEXT
         )
         allure.attach(
-            '{}'.format(responce.text.replace('\'', '""')), 'Responce body', allure.attachment_type.JSON
+            f'{responce.status_code}',
+            'Responce status code',
+            allure.attachment_type.TEXT
         )
         allure.attach(
-            f'{responce.headers}', 'Responce headers', allure.attachment_type.TEXT
+            '{}'.format(responce.text.replace('\'', '""')),
+            'Responce body',
+            allure.attachment_type.JSON
         )
         allure.attach(
-            f'{responce.cookies}', 'Responce coocke', allure.attachment_type.TEXT
+            f'{responce.headers}',
+            'Responce headers',
+            allure.attachment_type.TEXT
+        )
+        allure.attach(
+            f'{responce.cookies}',
+            'Responce coocke',
+            allure.attachment_type.TEXT
         )
