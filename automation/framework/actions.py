@@ -2,7 +2,7 @@ import requests
 import allure
 from requests import Response
 
-from tools.report import Report
+from framework.report import Report
 
 
 class Action:

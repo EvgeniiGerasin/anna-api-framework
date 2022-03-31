@@ -1,6 +1,5 @@
 import json
 import allure
-import json
 
 from requests import Response
 
