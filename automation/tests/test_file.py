@@ -8,22 +8,16 @@ class TestWatherAPI:
 
     @allure.title('Get current wather')
     def test_call_current_weather_data(self):
-        
-        # r = requests.get(
-        #     'https://api.openweathermap.org/data/2.5/weather',
-        #     params={
-        #         'lat': '35',
-        #         'lon': '139',
-        #         'appid': '43696882c59420349118379491c29716',
-        #     }
-        # )
 
         session = Action('https://api.openweathermap.org/data/2.5/weather')
-        got = session.get(
+        got = session.request(
+            type='POST',
             params={
                 'lat': '35',
                 'lon': '139',
                 'appid': '43696882c59420349118379491c29716',
             }
         )
-        assert got.status_code == 200, got.text
+        want = 200
+        with allure.step('Check status request'):
+            assert got.status_code == want, got.text
