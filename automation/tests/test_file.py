@@ -3,6 +3,7 @@ import pytest
 
 from framework import Action
 from framework import Assert
+from framework import Report
 
 
 @allure.epic('Testing API OpenWather')
@@ -20,14 +21,24 @@ class TestWatherAPI:
         ]
     )
     def test_call_current_weather_data(self, geo):
-
-        session = Action('https://api.openweathermap.org/data/2.5/weather')
+        method = 'GET'
+        lat = geo[0]
+        lon = geo[1]
+        appid = '43696882c59420349118379491c29716'
+        url = 'https://api.openweathermap.org/data/2.5/weather'
+        Report.put_description(
+            url=url,
+            appid=appid,
+            lat=lat,
+            lon=lon
+        )
+        session = Action(url)
         got = session.request(
-            type='POST',
+            method=method,
             params={
-                'lat': geo[0],
-                'lon': geo[1],
-                'appid': '43696882c59420349118379491c29716',
+                'lat': lat,
+                'lon': lon,
+                'appid': appid,
             }
         )
         want = 200
