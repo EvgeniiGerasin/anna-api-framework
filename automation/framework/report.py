@@ -6,74 +6,74 @@ from requests import Response
 
 
 class Report:
-    
+
     # severity
     @staticmethod
     def severity(level: str):
-        """Putting the severity in report
+        """Inserts a test severity into the report
 
         Args:
             level (str): May be one of
             BLOCKER, CRITICAL, NORMAL, MINOR, TRIVIAL
         """
         if level == 'BLOCKER':
-            allure.severity(allure.severity_level.BLOCKER)
+            return allure.severity(allure.severity_level.BLOCKER)
         elif level == 'CRITICAL':
-            allure.severity(allure.severity_level.CRITICAL)
+            return allure.severity(allure.severity_level.CRITICAL)
         elif level == 'NORMAL':
             return allure.severity(allure.severity_level.NORMAL)
         elif level == 'MINOR':
-            allure.severity(allure.severity_level.MINOR)
+            return allure.severity(allure.severity_level.MINOR)
         elif level == 'TRIVIAL':
-            allure.severity(allure.severity_level.TRIVIAL)
+            return allure.severity(allure.severity_level.TRIVIAL)
 
     # links
     @staticmethod
     def link(url, name):
-        """Putting the link test in report"""
-        return allure.link(url, name)
+        """Inserts a link into the report"""
+        return allure.link(url=url, name=name)
 
     @staticmethod
-    def test_case(url, name):
-        """Putting the link of test case in report"""
-        return Report.test_case(url, name)
+    def testcase(url, name):
+        """Inserts a link to a test case into the report"""
+        return allure.testcase(url=url, name=name)
 
     @staticmethod
     def issue(url, name):
-        """Putting the link of issue in report"""
-        return Report.issue(url, name)
+        """Inserts a issue to a test case into the report"""
+        return allure.issue(url=url, url=name)
 
     # allure tags
     @staticmethod
     def feature(text: str):
-        """Putting the feature test in report"""
+        """Inserts a feature into the report"""
         return allure.feature(text)
 
     @staticmethod
     def title(text: str):
-        """Putting the title test in report"""
+        """Inserts a title into the report"""
         return allure.title(text)
 
     @staticmethod
     def epic(text: str):
-        """Putting the epic test in report"""
+        """Inserts a epic into the report"""
         return allure.title(text)
 
     @staticmethod
     def story(text: str):
-        """Putting the story test in report"""
+        """Inserts a story into the report"""
         return allure.title(text)
 
     # allure step
     @staticmethod
     def step(name: str):
-        """Putting the step test in report"""
+        """Inserts a step into the report"""
         return allure.step(name)
 
     # other custom attachements
     @staticmethod
-    def put_description(**kwargs):
-        """Putting a description in report
+    def description(**kwargs):
+        """Inserts a description into the report
 
         Args:
             **kwargs: description
@@ -86,8 +86,8 @@ class Report:
         allure.dynamic.description_html(description)
 
     @staticmethod
-    def put_request(data):
-        """Putting a info on request in report
+    def request(data):
+        """Inserts a info into the report
 
         Args:
             request (any): data
@@ -97,8 +97,8 @@ class Report:
         )
 
     @staticmethod
-    def put_responce(responce: Response):
-        """Putting info on responce in report. For example:
+    def responce(responce: Response):
+        """Inserts a info on responce in report. For example:
         body, headers, coockes, status code
 
         Args:
