@@ -41,7 +41,7 @@ class Report:
     @staticmethod
     def issue(url, name):
         """Inserts a issue to a test case into the report"""
-        return allure.issue(url=url, url=name)
+        return allure.issue(url=url, name=name)
 
     # allure tags
     @staticmethod
