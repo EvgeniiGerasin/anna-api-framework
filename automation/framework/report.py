@@ -6,7 +6,22 @@ from requests import Response
 
 class Report:
 
-    def put_request(self, data):
+    @staticmethod
+    def put_description(**kwargs):
+        """Putting description in report
+
+        Args:
+            **kwargs: description
+        """
+        description = ''
+        for arg, value in kwargs.items():
+            description += (
+                '<p>{}: <strong>{}</strong></p>'.format(arg, value)
+            )
+        allure.dynamic.description_html(description)
+
+    @staticmethod
+    def put_request(data):
         """Putting info on request in report
 
         Args:
@@ -16,7 +31,8 @@ class Report:
             json.dumps(data), 'Request information', allure.attachment_type.JSON
         )
 
-    def put_responce(self, responce: Response):
+    @staticmethod
+    def put_responce(responce: Response):
         """Putting info on responce in report. For example:
         body, headers, coockes, status code
 
