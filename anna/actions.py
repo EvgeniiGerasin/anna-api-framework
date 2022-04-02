@@ -20,7 +20,7 @@ class Action:
         Returns:
             Response: responce of request
         """
-        with allure.step(f'GET request'):
+        with allure.step('{} request'.format(method)):
             responce = self._s.request(method, self.url, **kwargs)
             self._report.responce(responce)
         return responce
