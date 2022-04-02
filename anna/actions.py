@@ -2,8 +2,7 @@ import requests
 import allure
 from requests import Response
 
-from framework.report import Report
-
+from anna.report import Report
 
 class Action:
 
