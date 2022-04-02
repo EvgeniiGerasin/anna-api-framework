@@ -22,10 +22,6 @@ class Action:
         """
 
         with allure.step(f'GET request'):
-            self._report.request(kwargs)
-            if method == 'GET':
-                responce = self._s.get(self.url, **kwargs)
-            elif method == 'POST':
-                responce = self._s.post(self.url, **kwargs)
+            responce = self._s.request(method, self.url, **kwargs)
             self._report.responce(responce)
         return responce
