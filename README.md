@@ -1,4 +1,4 @@
-# API TEST FRAMEWORK
+# ANNA API TEST FRAMEWORK
 
 Framework work for rapid development of API tests and report generation
 
