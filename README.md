@@ -1,6 +1,6 @@
 # ANNA API TEST FRAMEWORK
 
-Framework work for rapid development of API tests and report generation
+Framework work for rapid development of API tests scripts and report generation
 
 
 ## Authors
