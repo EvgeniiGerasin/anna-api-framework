@@ -42,47 +42,69 @@ class Assert:
             ):
                 assert variable_first == variable_second, text_error
 
-    # @staticmethod
-    # def count_compration(
-    #     variable_large,
-    #     variable_smaller,
-    #     text_error: str,
-    # ) -> None:
-    #     """Comparing two numeric values
+    @classmethod
+    def compare(
+        cls,
+        variable_first,
+        comparison_sign: str,
+        variable_second,
+        text_error: str,
+    ):
+        with allure.step(
+            'Assertion: comparing "{}" {} "{}"'.format(
+                variable_first, comparison_sign, variable_second,
+            )
+        ):
+            if comparison_sign == '=' or comparison_sign == '==':
+                assert variable_first == variable_second, text_error
+            elif comparison_sign == '!=':
+                assert variable_first != variable_second, text_error
+            elif comparison_sign == '>':
+                assert variable_first > variable_second, text_error
+            elif comparison_sign == '<':
+                assert variable_first < variable_second, text_error
+            elif comparison_sign == '>=':
+                assert variable_first >= variable_second, text_error
+            elif comparison_sign == '<=':
+                assert variable_first <= variable_second, text_error
+            else:
+                raise ValueError(
+                    'Unknown comparison sign {}'
+                    .format(comparison_sign)
+                )
 
-    #     Args:
-    #         variable_large(any): the value of the larger number
-    #         variable_smaller(any): smaller field value
-    #         text_error(str): error text
-    #     """
-    #     with allure.step(
-    #         'Assertion: comparing "{}" > "{}"'.format(
-    #             variable_large, variable_smaller,)
-    #     ):
-    #         try:
-    #             assert variable_large > variable_smaller
-    #         except:
-    #             assert False, text_error
+    @classmethod
+    def contains(
+        cls,
+        variable_what,
+        variable_where,
+        text_error: str,
+    ) -> None:
+        """Checking the content in something (a in b)
 
-    # @staticmethod
-    # def contains(
-    #     variable_what,
-    #     variable_where,
-    #     text_error: str,
-    # ) -> None:
-    #     """Checking the content in something (a in b)
-
-    #     :Args:
-    #         variable_what(any): what should be contained
-    #         variable_where(any): where it should be contained
-    #         text_error(str): error text
-    #     """
-    #     with allure.step(
-    #         'Assertion: content "{}" in "{}"'.format(
-    #             variable_what, variable_where
-    #         )
-    #     ):
-    #         try:
-    #             assert variable_what in variable_where
-    #         except:
-    #             assert False, text_error
+        :Args:
+            variable_what(any): what should be contained
+            variable_where(any): where it should be contained
+            text_error(str): error text
+        """
+        if cls._not:
+            cls._not = False
+            with allure.step(
+                'Assertion: not contains "{}" in "{}"'.format(
+                    variable_what, variable_where
+                )
+            ):
+                try:
+                    assert variable_what not in variable_where
+                except:
+                    assert False, text_error
+        else:
+            with allure.step(
+                'Assertion: contains "{}" in "{}"'.format(
+                    variable_what, variable_where
+                )
+            ):
+                try:
+                    assert variable_what in variable_where
+                except:
+                    assert False, text_error
