@@ -55,12 +55,12 @@ class Report:
     @staticmethod
     def epic(text: str):
         """Inserts a epic into the report"""
-        return allure.title(text)
+        return allure.epic(text)
 
     @staticmethod
     def story(text: str):
         """Inserts a story into the report"""
-        return allure.title(text)
+        return allure.story(text)
 
     # allure step
     @staticmethod
