@@ -3,8 +3,16 @@ import allure
 
 class Assert:
 
-    @staticmethod
-    def equality(
+    _not = False
+
+    @classmethod
+    def not_be(cls):
+        cls._not = True
+        return Assert
+
+    @classmethod
+    def equal(
+        cls,
         variable_first,
         variable_second,
         text_error: str,
@@ -15,63 +23,59 @@ class Assert:
             variable_first(any): value of the first field
             variable_second(any): value of the  second field
             text_error(str): error text
-        """
-        with allure.step(
-            'Assertion: equality "{}" == "{}"'.format(
-                variable_first, variable_second,)
-        ):
-            try:
-                assert variable_first == variable_second
-            except:
-                assert False, text_error
+         """
+        if cls._not:
+            cls._not = False
+            with allure.step(
+                'Assertion: not equality "{}" != "{}"'.format(
+                    variable_first,
+                    variable_second,
+                )
+            ):
+                assert variable_first != variable_second, text_error
+        else:
+            with allure.step(
+                'Assertion: equality "{}" == "{}"'.format(
+                    variable_first,
+                    variable_second,
+                )
+            ):
+                assert variable_first == variable_second, text_error
 
-    @staticmethod
-    def inequality(
+    @classmethod
+    def compare(
+        cls,
         variable_first,
+        comparison_sign: str,
         variable_second,
         text_error: str,
-    ) -> None:
-        """Checking for inequality of values of two fields
-        (of the same data type)
-
-        :Args:
-            variable_first(any): value of the first field
-            variable_second(any): value of the  second field
-            text_error(str): error text
-        """
+    ):
         with allure.step(
-            'Assertion: inequality "{}" != "{}"'.format(
-                variable_first, variable_second,)
+            'Assertion: comparing "{}" {} "{}"'.format(
+                variable_first, comparison_sign, variable_second,
+            )
         ):
-            try:
-                assert variable_first != variable_second
-            except:
-                assert False, text_error
+            if comparison_sign == '=' or comparison_sign == '==':
+                assert variable_first == variable_second, text_error
+            elif comparison_sign == '!=':
+                assert variable_first != variable_second, text_error
+            elif comparison_sign == '>':
+                assert variable_first > variable_second, text_error
+            elif comparison_sign == '<':
+                assert variable_first < variable_second, text_error
+            elif comparison_sign == '>=':
+                assert variable_first >= variable_second, text_error
+            elif comparison_sign == '<=':
+                assert variable_first <= variable_second, text_error
+            else:
+                raise ValueError(
+                    'Unknown comparison sign {}'
+                    .format(comparison_sign)
+                )
 
-    @staticmethod
-    def count_compration(
-        variable_large,
-        variable_smaller,
-        text_error: str,
-    ) -> None:
-        """Comparing two numeric values
-
-        Args:
-            variable_large(any): the value of the larger number
-            variable_smaller(any): smaller field value
-            text_error(str): error text
-        """
-        with allure.step(
-            'Assertion: comparing "{}" > "{}"'.format(
-                variable_large, variable_smaller,)
-        ):
-            try:
-                assert variable_large > variable_smaller
-            except:
-                assert False, text_error
-
-    @staticmethod
+    @classmethod
     def contains(
+        cls,
         variable_what,
         variable_where,
         text_error: str,
@@ -83,12 +87,24 @@ class Assert:
             variable_where(any): where it should be contained
             text_error(str): error text
         """
-        with allure.step(
-            'Assertion: content "{}" in "{}"'.format(
-                variable_what, variable_where
-            )
-        ):
-            try:
-                assert variable_what in variable_where
-            except:
-                assert False, text_error
+        if cls._not:
+            cls._not = False
+            with allure.step(
+                'Assertion: not contains "{}" in "{}"'.format(
+                    variable_what, variable_where
+                )
+            ):
+                try:
+                    assert variable_what not in variable_where
+                except:
+                    assert False, text_error
+        else:
+            with allure.step(
+                'Assertion: contains "{}" in "{}"'.format(
+                    variable_what, variable_where
+                )
+            ):
+                try:
+                    assert variable_what in variable_where
+                except:
+                    assert False, text_error
