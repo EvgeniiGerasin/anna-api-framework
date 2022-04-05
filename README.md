@@ -1,7 +1,7 @@
 
 # API TEST FRAMEWORK
 
-Framework work for rapid development of API tests and report generation
+Framework for rapid development of API tests and report generation
 
 [![Supported Versions](https://img.shields.io/pypi/pyversions/anna-api-test-framework.svg)](https://pypi.org/project/anna-api-test-framework)
 
