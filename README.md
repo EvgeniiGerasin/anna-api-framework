@@ -1,5 +1,7 @@
 
 # API TEST FRAMEWORK
+![image](https://user-images.githubusercontent.com/50915575/161916760-1834fc14-07b3-4931-b5a4-a482b86614c1.png)
+
 
 Framework for rapid development of API tests and report generation
 
