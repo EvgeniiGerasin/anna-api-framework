@@ -6,7 +6,7 @@ from anna.report import Report
 
 class Action:
 
-    def __init__(self, url):
+    def __init__(self, url=None):
 
         self._s = requests.session()
         self.url = url
@@ -21,6 +21,6 @@ class Action:
             Response: responce of request
         """
         with allure.step('{} request'.format(method)):
-            responce = self._s.request(method, self.url, **kwargs)
+            responce = self._s.request(method, **kwargs)
             self._report.responce(responce)
         return responce
