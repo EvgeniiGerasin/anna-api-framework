@@ -5,6 +5,8 @@ from requests import Response
 from anna.report import Report
 
 class Action:
+    # python setup.py sdist
+    # twine check dist/*  
 
     def __init__(self, url=None):
 
