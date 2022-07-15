@@ -15,8 +15,8 @@ class TestOpenWeather:
         api_id = user_params
         url = 'http://api.openweathermap.org/data/2.5/weather'
         Report.description(url=url, api_id='*****', lat=lat, lon=lon)
-        action = Action(url=url)
+        action = Action()
         want = 200
-        got = action.request('GET', params={'lat': lat, 'lon': lon, 'appid': api_id}).status_code
+        got = action.request('GET', url=url, params={'lat': lat, 'lon': lon, 'appid': api_id}).status_code
         with Report.step('Check status code'):
             Assert.compare(want, '=', got, 'Status code != {}'.format(want))

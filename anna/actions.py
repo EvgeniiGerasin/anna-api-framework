@@ -12,15 +12,16 @@ class Action:
         self.url = url
         self._report = Report()
 
-    def request(self, method: str, **kwargs) -> Response:
+    def request(self, method: str, url: str, **kwargs) -> Response:
         """method of request
 
         Args:
             method (str): method of request GET, POST and etc.
+            url (str): url of request
         Returns:
             Response: responce of request
         """
-        with allure.step('{} request'.format(method)):
-            responce = self._s.request(method, **kwargs)
+        with allure.step('{} {}'.format(method, url)):
+            responce = self._s.request(method, url, **kwargs)
             self._report.responce(responce)
         return responce

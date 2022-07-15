@@ -6,10 +6,10 @@ from anna.asserts import Assert
 class TestAnna(unittest.TestCase):
 
     def test_request(self):
-        methods = ['GET', ]
+        methods = ['GET', 'POST']
         for method in methods:
-            action = Action('http://ya.ru')
-            responce = action.request(method)
+            action = Action()
+            responce = action.request(method, 'http://ya.ru')
             self.assertEqual(
                 responce.status_code,
                 200,
