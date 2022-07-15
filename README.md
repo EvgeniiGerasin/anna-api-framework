@@ -50,8 +50,8 @@ class TestExample:
         # insert discription of the test
         Report.description(url=url, method=method, other='other information')
         # doing request and geting response
-        action = Action(url=url)
-        response = action.request(method=method)
+        action = Action()
+        response = action.request(method=method, url=url)
         got = response.status_code
         # checking response
         with Report.step('Checking response'):
