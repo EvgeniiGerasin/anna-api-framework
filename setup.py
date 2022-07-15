@@ -7,7 +7,7 @@ long_description = pathlib.Path(here / 'README.md').read_text(encoding='utf-8')
 
 setup(
     name="anna-api-test-framework",
-    version="0.0.4",
+    version="0.1.0",
     author="Evgenii Gerasin",
     author_email="e.d.gerasin@yandex.ru",
     description="Framework for rapid development of API tests and report generation",
