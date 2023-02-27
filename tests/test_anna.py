@@ -9,9 +9,9 @@ class TestAnna(unittest.TestCase):
         methods = ['GET', 'POST']
         for method in methods:
             action = Action()
-            responce = action.request(method, 'http://ya.ru')
+            response = action.request(method, 'http://ya.ru')
             self.assertEqual(
-                responce.status_code,
+                response.status_code,
                 200,
                 'Status code is not 200 with method {}'.format(method)
             )

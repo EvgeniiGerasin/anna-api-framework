@@ -68,7 +68,7 @@ class Report:
         """Inserts a step into the report"""
         return allure.step(name)
 
-    # other custom attachements
+    # other custom attachments
     @staticmethod
     def description(**kwargs):
         """Inserts a description into the report
@@ -85,60 +85,60 @@ class Report:
 
     @staticmethod
     def request(data):
-        """Inserts a info into the report
+        """Inserts additional info into the report
 
         Args:
-            request (any): data
+            data: Any
         """
         allure.attach(
             json.dumps(data), 'Request information', allure.attachment_type.JSON
         )
 
     @staticmethod
-    def responce(responce: Response):
-        """Inserts a info on responce in report. For example:
-        body, headers, coockes, status code
+    def response(response: Response):
+        """Inserts additional info on response in report. For example:
+        body, headers, cookies, status code
 
         Args:
-            responce (Response)
+            response: Response
         """
         allure.attach(
-            f'{responce.request.method}',
+            f'{response.request.method}',
             'Request method',
             allure.attachment_type.TEXT
         )
         allure.attach(
-            f'{responce.request.body}',
+            f'{response.request.body}',
             'Request body',
             allure.attachment_type.TEXT
         )
         allure.attach(
-            f'{responce.request.headers}',
+            f'{response.request.headers}',
             'Request header',
             allure.attachment_type.TEXT
         )
         allure.attach(
-            f'{responce.request.url}',
+            f'{response.request.url}',
             'Request url',
             allure.attachment_type.TEXT
         )
         allure.attach(
-            f'{responce.status_code}',
-            'Responce status code',
+            f'{response.status_code}',
+            'Response status code',
             allure.attachment_type.TEXT
         )
         allure.attach(
-            '{}'.format(responce.text.replace('\'', '""')),
-            'Responce body',
+            '{}'.format(response.text.replace('\'', '""')),
+            'Response body',
             allure.attachment_type.JSON
         )
         allure.attach(
-            f'{responce.headers}',
-            'Responce headers',
+            f'{response.headers}',
+            'Response headers',
             allure.attachment_type.TEXT
         )
         allure.attach(
-            f'{responce.cookies}',
-            'Responce coocke',
+            f'{response.cookies}',
+            'Response cookies',
             allure.attachment_type.TEXT
         )
